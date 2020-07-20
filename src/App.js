@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import HomePage from "./component/HomePage";
-import FormPizza from "./component/FormPizza";
-import NavBar from "./component/NavBar";
+import HomePage from "./components/HomePage";
+import FormPizza from "./components/FormPizza";
+import NavBar from "./components/NavBar";
 import { Route } from 'react-router-dom';
 
 
