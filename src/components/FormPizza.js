@@ -3,8 +3,6 @@ import * as yup from 'yup';
 import axios from 'axios';
 
 
-
-
 const FormPizza = ({orders, setOrders}) => {
 
     //this is the react state
@@ -39,7 +37,7 @@ const FormPizza = ({orders, setOrders}) => {
             olive: yup.boolean(),
             bacon: yup.boolean(),
             instructions: yup.string().required('Please enter a special order')
-          });
+        });
     
     //this is use to valid the button to disabled
     useEffect(() => {
@@ -86,7 +84,7 @@ const FormPizza = ({orders, setOrders}) => {
             });
     });
 
-    };
+};
 
     
     const handleChange = e => {
@@ -95,22 +93,22 @@ const FormPizza = ({orders, setOrders}) => {
             ...formState,
             [e.target.name]:
               e.target.type === "checkbox" ? e.target.checked : e.target.value
-          };
-      
-          validateChange(e);
-          setFormState(newFormData);
         };
+      
+        validateChange(e);
+        setFormState(newFormData);
+    };
 
 
-          
           
     return (
 
         <>
         <form onSubmit={formSubmit}>
             <h1>Order Your Pizza Here!</h1>
-            <label className='name'>
+            <label className="name">
                 <input 
+                    data-cy="name"
                     type="text"
                     name='name'
                     label='name'
@@ -131,23 +129,24 @@ const FormPizza = ({orders, setOrders}) => {
                 </select>
             </label>
             <label className='toppings'>
-                <input type='checkbox' name='anchovies' value={formState.anchovies} onChange={handleChange} />
+                <input data-cy='anchovies' type='checkbox' name='anchovies' value={formState.anchovies} onChange={handleChange} />
                 Anchovies
             </label>
             <label>
-                <input type='checkbox' name='pepperoni' value={formState.pepperoni} onChange={handleChange} />
+                <input data-cy='pepperoni' type='checkbox' name='pepperoni' value={formState.pepperoni} onChange={handleChange} />
                 Pepperoni
             </label>
             <label>
-                <input type='checkbox' name='olive' value={formState.olive} onChange={handleChange} />
+                <input data-cy='olive' type='checkbox' name='olive' value={formState.olive} onChange={handleChange} />
                 Olive
             </label>
             <label>
-                <input type='checkbox' name='bacon' value={formState.bacon} onChange={handleChange} />
+                <input data-cy='bacon' type='checkbox' name='bacon' value={formState.bacon} onChange={handleChange} />
                 Bacon
             </label>
             <label>
-                <textarea 
+                <textarea
+                data-cy="instructions" 
                 type='text'
                 name='instructions'
                 placeholder="Please Type Instructions Here!"
@@ -157,7 +156,7 @@ const FormPizza = ({orders, setOrders}) => {
                 {errors.instructions.length > 0 ? (
                 <p className='error'>{errors.instructions}</p>) : null}
             </label>
-            <button disabled={buttonDisabled}>Submit</button>
+            <button data-cy="submit-button" disabled={buttonDisabled}>Submit</button>
         </form>
         <pre>{JSON.stringify(orders, null, 2)}</pre>
         </>
