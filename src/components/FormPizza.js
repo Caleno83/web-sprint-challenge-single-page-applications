@@ -1,9 +1,122 @@
 import React, { useState, useEffect } from 'react';
 import * as yup from 'yup';
 import axios from 'axios';
+import order from '../Img/orders.jpg'
+import styled from 'styled-components';
+
+const FormContainer = styled.div`
+    background-image: url(${order});
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 870px;
+    padding-top: 30px;
+    h1 {
+        font-size: 2rem;
+        margin-left: 10px;
+        padding-bottom: 20px;
+        text-align: center;
+    }
+    form {
+        display: flex;
+        flex-direction: column;
+        width: 420px;
+        margin: 10px auto;
+        padding: 50px;
+        border: 2px solid black;
+        border-radius: 5px;
+        background-color: white;
+        height: auto;
+      }
+      label {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        margin: 10px;
+        font-size: 1.6rem;
+      }
+
+      .name {
+          input {
+              font-size: 1.7rem;
+              padding-left: 30px;
+          }
+      }
+    
+      input {
+        width: 300px;
+        margin: 5px 0 0 0;
+        border: 2px solid gray;
+        border-radius: 6px;
+        padding: 10px;
+        font-size: 2.1rem;
+        
+      }
+
+      .size {
+          
+              margin-bottom: 10ox;
+          
+          select {
+              margin-top: 10px;
+              padding: 5px;
+              border: 2px solid gray;
+              border-radius: 6px;
+          }
+      }
+    
+      .error {
+        font-size: 1.5rem;
+        color: red;
+      }
+    
+      .toppings {
+        display: inline-block;
+        margin: 20px 0 0 10px;
+      }
+    
+      .toppings input {
+        width: 20px;
+        display: inline-block;
+        margin-right: 5px;
+      }
+
+      textArea {
+          margin-top: 20px;
+          padding: 20px 20px;
+          width: 300px;
+          height: 90px;
+          text-align: left;
+          font-size: 1.7rem;
+      }
+
+      button {
+        width: 150px;
+        background-color: black;
+        color: white;
+        font-size: 1.2rem;
+        margin: 20px 0 0 85px;
+        padding: 8px 11px;
+        cursor: pointer;
+        border: 2px black solid;
+        border-radius: 5px;
+      }
+    
+      button:disabled {
+        background-color: white;
+        border: 1px solid silver;
+        color: gray;
+        cursor: not-allowed;
+      }
+    
+      pre {
+        font-size: 1.5rem;
+        text-align: center;
+      }
+`
 
 
-const FormPizza = ({orders, setOrders}) => {
+
+const FormPizza = ({ orders, setOrders }) => {
 
     //this is the react state
     const defaultState = {
@@ -103,65 +216,66 @@ const FormPizza = ({orders, setOrders}) => {
           
     return (
 
-        <>
-        <form onSubmit={formSubmit}>
-            <h1>Order Your Pizza Here!</h1>
-            <label className="name">
-                <input 
-                    data-cy="name"
-                    type="text"
-                    name='name'
-                    label='name'
-                    placeholder="Please, Enter Your Name Here"
-                    value={formState.name}
-                    onChange={handleChange}
-                    errors={errors}
-                />
-                {errors.name.length > 0 ? (
-                 <p className='error'>{errors.name}</p>) : null}
-            </label>
-            <label className='size'>
-                What Size Do You like?
-                <select name='size' onChange={handleChange}>
-                    <option value='small'>Small</option>
-                    <option value='medium'>Medium</option>
-                    <option value='large'>Large</option>
-                </select>
-            </label>
-            <label className='toppings'>
-                <input data-cy='anchovies' type='checkbox' name='anchovies' value={formState.anchovies} onChange={handleChange} />
-                Anchovies
-            </label>
-            <label>
-                <input data-cy='pepperoni' type='checkbox' name='pepperoni' value={formState.pepperoni} onChange={handleChange} />
-                Pepperoni
-            </label>
-            <label>
-                <input data-cy='olive' type='checkbox' name='olive' value={formState.olive} onChange={handleChange} />
-                Olive
-            </label>
-            <label>
-                <input data-cy='bacon' type='checkbox' name='bacon' value={formState.bacon} onChange={handleChange} />
-                Bacon
-            </label>
-            <label>
-                <textarea
-                data-cy="instructions" 
-                type='text'
-                name='instructions'
-                placeholder="Please Type Instructions Here!"
-                value={formState.instructions}
-                onChange={handleChange}
-                />
-                {errors.instructions.length > 0 ? (
-                <p className='error'>{errors.instructions}</p>) : null}
-            </label>
-            <button data-cy="submit-button" disabled={buttonDisabled}>Submit</button>
-        </form>
-        <pre>{JSON.stringify(orders, null, 2)}</pre>
-        </>
+        <FormContainer>
+            <form onSubmit={formSubmit}>
+                <h1>Order Your Pizza Here!</h1>
+                <label className="name">
+                    <input 
+                        data-cy="name"
+                        type="text"
+                        name='name'
+                        label='name'
+                        placeholder="Please, Enter Your Name Here"
+                        value={formState.name}
+                        onChange={handleChange}
+                        errors={errors}
+                    />
+                    {errors.name.length > 0 ? (
+                    <p className='error'>{errors.name}</p>) : null}
+                </label>
+                <label className='size'>
+                    What Size Do You like?
+                    <select name='size' onChange={handleChange}>
+                        <option value='small'>Small</option>
+                        <option value='medium'>Medium</option>
+                        <option value='large'>Large</option>
+                    </select>
+                </label>
+                <label className='toppings'>
+                    <input data-cy='anchovies' type='checkbox' name='anchovies' value={formState.anchovies} onChange={handleChange} />
+                    anchovies
+                </label>
+                <label className='toppings'>
+                    <input data-cy='pepperoni' type='checkbox' name='pepperoni' value={formState.pepperoni} onChange={handleChange} />
+                    pepperoni
+                </label>
+                <label className='toppings'>
+                    <input data-cy='olive' type='checkbox' name='olive' value={formState.olive} onChange={handleChange} />
+                    olive
+                </label>
+                <label className='toppings'>
+                    <input data-cy='bacon' type='checkbox' name='bacon' value={formState.bacon} onChange={handleChange} />
+                    bacon
+                </label>
+                <label>
+                    <textarea
+                        data-cy="instructions" 
+                        type='text'
+                        name='instructions'
+                        placeholder="Please Type Instructions Here!"
+                        value={formState.instructions}
+                        onChange={handleChange}
+                    />
+                    {errors.instructions.length > 0 ? (
+                    <p className='error'>{errors.instructions}</p>) : null}
+                </label>
+                <button data-cy="submit-button" disabled={buttonDisabled}>Submit</button>
+                <pre>{JSON.stringify(orders, null, 2)}</pre>
+            </form>
+            
+        </FormContainer>
 
-     )
+    )
 }
 
 export default FormPizza;
